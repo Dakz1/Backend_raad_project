@@ -56,25 +56,6 @@ module.exports = class User {
     });
   }
 
-  //finished here and find the auth stuff
-  update() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const db = await init();
-        let updatedUserData = await db
-          .collection("users")
-          .findOneAndUpdate(
-            { _id: ObjectId(this.id) },
-            { returnOriginal: false }
-          );
-        let updatedUser = new User(updatedUserData.value);
-        resolve(updatedUser);
-      } catch (err) {
-        reject("Error updating user");
-      }
-    });
-  }
-
   destroy() {
     return new Promise(async (resolve, reject) => {
       try {

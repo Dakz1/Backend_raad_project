@@ -31,6 +31,7 @@ module.exports = class Task {
           .collection("tasks")
           .find({ _id: ObjectId(id) })
           .toArray();
+        console.log(taskData);
         let task = new Task({ ...taskData[0], id: taskData[0]._id });
         resolve(task);
       } catch (err) {
@@ -62,7 +63,7 @@ module.exports = class Task {
           .collection("tasks")
           .findOneAndUpdate(
             { _id: ObjectId(this.id) },
-            { $inc: { frequency: "2" } },
+            { $inc: { frequency: 2 } },
             { returnOriginal: false }
           );
         let updatedTask = new Task(updatedTaskData.value);

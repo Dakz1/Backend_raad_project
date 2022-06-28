@@ -1,12 +1,11 @@
-  
-version: '3'
+version: "3"
 services:
   server:
     image: node:12.18.4
     working_dir: /code
-    ports: 
+    ports:
       - 3000:3000
-    environment: 
+    environment:
       - DB_NAME=shelter
       - DB_CONNECTION=mongodb://futureproof:shelterpass@db:27017
     depends_on:
@@ -22,7 +21,7 @@ services:
     volumes:
       - "dbdata:/var/lib/mongodb/data"
       - "./db/seeds.js:/docker-entrypoint-initdb.d/seeds.js:ro"
-    environment: 
+    environment:
       - MONGO_INITDB_ROOT_USERNAME=futureproof
       - MONGO_INITDB_DATABASE=shelter
       - MONGO_INITDB_ROOT_PASSWORD=shelterpass

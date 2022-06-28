@@ -1,22 +1,35 @@
 const db = connect("mongodb://localhost:27017/shelter");
 
 db.tasks.drop();
-// db.owners.drop()
+db.users.drop();
 
 db.tasks.insertMany([
   {
-    id: 1,
     habit: "Drink Water",
-    frequency: "two liters a day",
+    frequency: 2,
+    freq_text: "",
   },
   {
-    id: 2,
     habit: "read book",
-    frequency: "10 pages a day",
+    frequency: 10,
+    freq_text: "",
   },
   {
-    id: 3,
     habit: "go outside",
-    frequency: "10 minutes a day",
+    frequency: 10,
+    freq_text: "",
+  },
+]);
+
+db.users.insertMany([
+  {
+    userName: "Annabella",
+    password: "RoastChicken",
+    email: "Anna@hotmail.com",
+  },
+  {
+    userName: "Stevenn",
+    password: "Oyster",
+    email: "StevOnsen@yahoo.com",
   },
 ]);

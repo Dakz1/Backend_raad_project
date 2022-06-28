@@ -6,8 +6,9 @@ const { ObjectId } = require("mongodb");
 module.exports = class User {
   constructor(data) {
     this.id = data.id;
-    this.UserName = data.UserName;
-    this.Password = data.Password;
+    this.userName = data.userName;
+    this.password = data.password;
+    this.email = data.email;
   }
 
   static get all() {
@@ -35,18 +36,18 @@ module.exports = class User {
         let user = new User({ ...userData[0], id: userData[0]._id });
         resolve(user);
       } catch (err) {
-        reject("Task not found");
+        reject("User not found");
       }
     });
   }
 
-  static create(UserName, Password) {
+  static create(userName, password, email) {
     return new Promise(async (resolve, reject) => {
       try {
         const db = await init();
         let userData = await db
           .collection("users")
-          .insertOne({ UserName, Password });
+          .insertOne({ userName, password, email });
         let newUser = new User(userData.ops[0]);
         resolve(newUser);
       } catch (err) {
@@ -64,7 +65,6 @@ module.exports = class User {
           .collection("users")
           .findOneAndUpdate(
             { _id: ObjectId(this.id) },
-            { $inc: { frequency: "2" } },
             { returnOriginal: false }
           );
         let updatedUser = new User(updatedUserData.value);

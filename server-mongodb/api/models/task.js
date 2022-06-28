@@ -6,6 +6,7 @@ module.exports = class Task {
     this.id = data.id;
     this.habit = data.habit;
     this.frequency = data.frequency;
+    this.week = data.week;
   }
 
   static get all() {
@@ -40,13 +41,13 @@ module.exports = class Task {
     });
   }
 
-  static create(habit, frequency) {
+  static create(habit, frequency, week) {
     return new Promise(async (resolve, reject) => {
       try {
         const db = await init();
         let taskData = await db
           .collection("tasks")
-          .insertOne({ habit, frequency });
+          .insertOne({ habit, frequency, week });
         let newTask = new Task(taskData.ops[0]);
         resolve(newTask);
       } catch (err) {
@@ -55,6 +56,7 @@ module.exports = class Task {
     });
   }
 
+  //THIS NEEDS TO BE LOOKED AT TOMORROW IN TERMS OF INC
   update() {
     return new Promise(async (resolve, reject) => {
       try {

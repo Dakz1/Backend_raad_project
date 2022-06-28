@@ -8,4 +8,46 @@ router.get("/", async (req, res) => {
   res.json(users);
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+  } catch (err) {
+    res.status(404).json({ err });
+  }
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const user = await User.create(
+      req.body.userName,
+      req.body.email,
+      req.body.password
+    );
+    res.json(user);
+  } catch (err) {
+    res.status(404).json({ err });
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const updatedUser = await user.update();
+    res.json({ user: updatedUser });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    await user.destroy();
+    res.status(204).json("User deleted");
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 module.exports = router;

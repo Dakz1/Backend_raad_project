@@ -23,7 +23,11 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const task = await Task.create(req.body.habit, req.body.frequency);
+    const task = await Task.create(
+      req.body.habit,
+      req.body.frequency,
+      req.body.week
+    );
     res.json(task);
   } catch (err) {
     res.status(404).json({ err });

@@ -7,7 +7,8 @@ services:
       - 3000:3000
     environment:
       - DB_NAME=shelter
-      - DB_CONNECTION=mongodb://futureproof:shelterpass@db:27017
+      - DB_CONNECTION=mongodb+srv://raaddatabase:TJ9rTxJmiae0pJ0V@cluster0.qf3tv.mongodb.net/?retryWrites=true&w=majority
+
     depends_on:
       - db
     volumes:

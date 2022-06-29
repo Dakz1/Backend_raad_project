@@ -8,7 +8,7 @@ module.exports = class User {
     this.id = data.id;
     this.userName = data.userName;
     this.name = data.name;
-    this.password = data.password;
+    this.passwordDigest = data.password_digest;
     this.email = data.email;
   }
 

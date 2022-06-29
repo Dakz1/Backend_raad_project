@@ -27,12 +27,20 @@ db.tasks.insertMany([
 db.users.insertMany([
   {
     userName: "Annabella",
-    password: "RoastChicken",
+    name: "ashdjkashdjkah",
+    password_digest: "RoastChicken",
     email: "Anna@hotmail.com",
   },
   {
     userName: "Stevenn",
-    password: "Oyster",
+    name: "sdjlskdjlkjfd",
+    password_digest: "Oyster",
     email: "StevOnsen@yahoo.com",
+  },
+  {
+    userName: "Lewis",
+    name: "ajdhakjhsd",
+    password_digest: "Roast",
+    email: "Annwa@hotmail.com",
   },
 ]);

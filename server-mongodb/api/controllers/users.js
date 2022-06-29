@@ -8,20 +8,12 @@ router.get("/", async (req, res) => {
   res.json(users);
 });
 
-router.get("/:id", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    res.json(user);
-  } catch (err) {
-    res.status(404).json({ err });
-  }
-});
-
 router.post("/", async (req, res) => {
   try {
     const user = await User.create(
       req.body.userName,
       req.body.email,
+      req.body.name,
       req.body.password
     );
     res.json(user);

@@ -7,7 +7,8 @@ module.exports = class User {
   constructor(data) {
     this.id = data.id;
     this.userName = data.userName;
-    this.password = data.password;
+    this.name = data.name;
+    this.passwordDigest = data.password_digest;
     this.email = data.email;
   }
 
@@ -25,6 +26,22 @@ module.exports = class User {
     });
   }
 
+  static findByEmail(email) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const db = await init();
+        let userData = await db
+          .collection("users")
+          .find({"email" : email })
+          .toArray();
+        let user = new User({ ...userData[0], email: userData[0].email });
+        resolve(user);
+      } catch (err) {
+        reject("User not found");
+      }
+    });
+  }
+
   static findById(id) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -33,6 +50,7 @@ module.exports = class User {
           .collection("users")
           .find({ _id: ObjectId(id) })
           .toArray();
+        console.log(userData);
         let user = new User({ ...userData[0], id: userData[0]._id });
         resolve(user);
       } catch (err) {
@@ -41,13 +59,13 @@ module.exports = class User {
     });
   }
 
-  static create(userName, password, email) {
+  static create(userName, password, email, name) {
     return new Promise(async (resolve, reject) => {
       try {
         const db = await init();
         let userData = await db
           .collection("users")
-          .insertOne({ userName, password, email });
+          .insertOne({ userName, password, email, name });
         let newUser = new User(userData.ops[0]);
         resolve(newUser);
       } catch (err) {

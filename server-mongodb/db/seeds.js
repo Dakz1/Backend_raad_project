@@ -24,23 +24,3 @@ db.tasks.insertMany([
   },
 ]);
 
-db.users.insertMany([
-  {
-    userName: "Annabella",
-    name: "ashdjkashdjkah",
-    password: "RoastChicken",
-    email: "Anna@hotmail.com",
-  },
-  {
-    userName: "Stevenn",
-    name: "sdjlskdjlkjfd",
-    password: "Oyster",
-    email: "StevOnsen@yahoo.com",
-  },
-  {
-    userName: "Lewis",
-    name: "ajdhakjhsd",
-    password: "Roast",
-    email: "Annwa@hotmail.com",
-  },
-]);

@@ -8,7 +8,7 @@ module.exports = class User {
     this.id = data.id;
     this.userName = data.userName;
     this.name = data.name;
-    this.passwordDigest = data.password_digest;
+    this.password = data.password;
     this.email = data.email;
   }
 
@@ -18,8 +18,8 @@ module.exports = class User {
         const db = await init();
         const userData = await db.collection("users").find().toArray();
         console.log(userData);
-        let users = userData.map((b) => new User(b));
-        resolve(users);
+        //let users = userData.map((b) => new User(b));
+        resolve(userData);
       } catch (err) {
         reject("User not found");
       }
@@ -61,15 +61,15 @@ module.exports = class User {
   }
   */
 
-  static create(userName, password, email, name) {
+  static create(userName) {
     return new Promise(async (resolve, reject) => {
       try {
         const db = await init();
         let userData = await db
           .collection("users")
-          .insertOne({ userName, password, email, name });
-        let newUser = new User(userData.ops[0]);
-        resolve(newUser);
+          .insertOne(userName);
+        //let newUser = new User(userData.ops[0]);
+        resolve(userData);
       } catch (err) {
         reject("Error creating user");
       }

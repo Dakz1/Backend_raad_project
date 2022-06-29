@@ -7,6 +7,7 @@ const User = require("../models/user");
 
 router.post("/register", async (req, res) => {
   try {
+    console.log(req.body)
     const salt = await bcrypt.genSalt();
     const hashed = await bcrypt.hash(req.body.password, salt);
     await User.create({ ...req.body, password: hashed });

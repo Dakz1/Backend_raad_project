@@ -1,30 +1,26 @@
-const db = connect("mongodb://localhost:27017/shelter")
+const db = connect("mongodb://localhost:27017/shelter");
 
-
-db.tasks.drop()
-// db.owners.drop()
+db.tasks.drop();
+db.users.drop();
 
 db.tasks.insertMany([
-    {
-        id: 1,
-        habit: 'Drink Water',
-        frequency: 'two liters a day'
-    },
-    {
-        id: 2,
-        habit: 'read book',
-        frequency: '10 pages a day'
-    },
-    {
-        id: 3,
-        habit: 'go outside',
-        frequency: '10 minutes a day'
-    }
-])
+  {
+    habit: "Drink Water",
+    frequency: 2,
+    freq_text: "",
+    week: [0, 0, 0, 0, 0, 0, 0],
+  },
+  {
+    habit: "read book",
+    frequency: 10,
+    freq_text: "",
+    week: [0, 0, 0, 0, 0, 0, 0],
+  },
+  {
+    habit: "go outside",
+    frequency: 10,
+    freq_text: "",
+    week: [0, 0, 0, 0, 0, 0, 0],
+  },
+]);
 
-// db.owners.insertMany([
-//     { name: 'Beth' },
-//     { name: 'Naz' },
-//     { name: 'Eric' },
-//     { name: 'Vesna' }
-// ])

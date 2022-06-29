@@ -1,59 +1,74 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
-const Task = require('../models/task')
+const Task = require("../models/task");
 
-// dogs index route
-router.get('/', async (req, res) => {
-    try {
-        const tasks = await Task.all
-        res.json({tasks})
-    } catch(err) {
-        res.status(500).json({err})
-    }
-})
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const tasks = await Task.all;
+    res.json({ tasks });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
 
-// dogs show route
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const dog = await Dog.findById(req.params.id)
-//         res.json(dog)
-//     } catch(err) {
-//         res.status(404).json({err})
-//     }
-// })
+router.get("/:id", verifyToken, async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    res.json(task);
+  } catch (err) {
+    res.status(404).json({ err });
+  }
+});
 
-// // Create dog route
-// router.post('/', async (req, res) => {
-//     try {
-//         const dog = await Dog.create(req.body.name, req.body.age)
-//         res.json(dog)
-//     } catch(err) {
-//         res.status(404).json({err})
-//     }
-// })
+router.post("/", verifyToken, async (req, res) => {
+  try {
+    const task = await Task.create(
+      req.body.habit,
+      req.body.frequency,
+      req.body.week
+    );
+    res.json(task);
+  } catch (err) {
+    res.status(404).json({ err });
+  }
+});
 
-// // dogs update route
-// router.patch('/:id', async (req, res) => {
-//     try {
-//         const dog = await Dog.findById(req.params.id)
-//         const updatedDog = await dog.update()
-//         res.json({dog: updatedDog})
-//     } catch(err) {
-//         res.status(500).json({err})
-//     }
-// })
+router.patch("/:id", verifyToken, async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    const updatedTask = await task.update();
+    res.json({ task: updatedTask });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
 
-// // delete dog route
-// router.delete('/:id', async (req, res) => {
-//     try {
-//         const dog = await Dog.findById(req.params.id)
-//         await dog.destroy()
-//         res.status(204).json('Dog deleted')
-//     } catch(err) {
-//         res.status(500).json({err})
-//     }
-// })
+router.delete("/:id", verifyToken, async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    await task.destroy();
+    res.status(204).json("Task deleted");
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
 
+function verifyToken(req,res,next) {
+  const token = req.headers['authorization'];
+  if(token) {
+      jwt.verify(token, process.env.SECRET, async (err, data) => {
+          console.log(data)
+          if(err) {
+              res.status(403).json({err: 'Invalid token'}) 
+          } else {
+              next();
+          }
+      })
+  } else {
+     res.status(403).json({err: 'Missing token'}) 
+  }
+}
 
 module.exports = router;

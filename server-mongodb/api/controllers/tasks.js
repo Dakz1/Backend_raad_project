@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 const Task = require("../models/task");
 
-router.get("/", async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
   try {
     const tasks = await Task.all;
     res.json({ tasks });
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", verifyToken, async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
     res.json(task);
@@ -21,7 +22,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   try {
     const task = await Task.create(
       req.body.habit,
@@ -34,7 +35,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", verifyToken, async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
     const updatedTask = await task.update();
@@ -44,7 +45,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyToken, async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
     await task.destroy();
@@ -53,5 +54,21 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ err });
   }
 });
+
+function verifyToken(req,res,next) {
+  const token = req.headers['authorization'];
+  if(token) {
+      jwt.verify(token, process.env.SECRET, async (err, data) => {
+          console.log(data)
+          if(err) {
+              res.status(403).json({err: 'Invalid token'}) 
+          } else {
+              next();
+          }
+      })
+  } else {
+     res.status(403).json({err: 'Missing token'}) 
+  }
+}
 
 module.exports = router;

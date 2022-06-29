@@ -41,6 +41,7 @@ module.exports = class User {
       }
     });
   }
+  /*
 
   static findById(id) {
     return new Promise(async (resolve, reject) => {
@@ -58,6 +59,7 @@ module.exports = class User {
       }
     });
   }
+  */
 
   static create(userName, password, email, name) {
     return new Promise(async (resolve, reject) => {
@@ -73,7 +75,7 @@ module.exports = class User {
       }
     });
   }
-
+/*
   destroy() {
     return new Promise(async (resolve, reject) => {
       try {
@@ -85,4 +87,5 @@ module.exports = class User {
       }
     });
   }
+  */
 };

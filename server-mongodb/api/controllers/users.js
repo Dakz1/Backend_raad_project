@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
   res.json(users);
 });
 
+/*
 router.post("/", async (req, res) => {
   try {
     const user = await User.create(
@@ -21,6 +22,7 @@ router.post("/", async (req, res) => {
     res.status(404).json({ err });
   }
 });
+
 
 router.patch("/:id", async (req, res) => {
   try {
@@ -41,5 +43,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ err });
   }
 });
-
+*/
 module.exports = router;

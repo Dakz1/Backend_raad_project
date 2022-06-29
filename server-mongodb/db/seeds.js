@@ -28,19 +28,19 @@ db.users.insertMany([
   {
     userName: "Annabella",
     name: "ashdjkashdjkah",
-    password_digest: "RoastChicken",
+    password: "RoastChicken",
     email: "Anna@hotmail.com",
   },
   {
     userName: "Stevenn",
     name: "sdjlskdjlkjfd",
-    password_digest: "Oyster",
+    password: "Oyster",
     email: "StevOnsen@yahoo.com",
   },
   {
     userName: "Lewis",
     name: "ajdhakjhsd",
-    password_digest: "Roast",
+    password: "Roast",
     email: "Annwa@hotmail.com",
   },
 ]);

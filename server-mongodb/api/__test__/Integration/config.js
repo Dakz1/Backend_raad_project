@@ -1,4 +1,4 @@
-
+/*
 const request = require('supertest');
 const apiServer = require('../../server');
 
@@ -25,3 +25,4 @@ global.request = request;
 global.app = app;
 global.resetTestDB = resetTestDB;
 global.port = process.env.PORT || 5000;
+*/

@@ -61,9 +61,14 @@ module.exports = class Task {
     return new Promise(async (resolve, reject) => {
       try {
         const db = await init();
-        let updatedTaskData = await db.tasks.findAndModify(
-          { _id: ObjectId(this.id)},
-          {$set: { "week" : 1}});
+        let updatedTaskData = await db
+          .collection("tasks")
+          .findOneAndUpdate(
+            console.log(habit),
+            { _id: ObjectId(this.id)},
+            { $inc: { week: 1 } },
+            { returnOriginal: false }
+          );
 
         let updatedTask = new Task(updatedTaskData.value);
         resolve(updatedTask);

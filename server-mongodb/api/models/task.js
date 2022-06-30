@@ -69,6 +69,7 @@ module.exports = class Task {
             { $inc: { week: 1 } },
             { returnOriginal: false }
           );
+
         let updatedTask = new Task(updatedTaskData.value);
         resolve(updatedTask);
       } catch (err) {

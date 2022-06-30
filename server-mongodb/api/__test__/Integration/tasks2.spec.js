@@ -27,4 +27,12 @@ describe('insert', () => {
     const insertedTask = await tasks.findOne({_id: ObjectId});
     expect(insertedTask).toEqual(mockTask);
   });
+
+  it('should find a doc into collection', async () => {
+    const tasks = db.collection('tasks');
+
+    const mockTask = { habit: "anime", frequency: "6", week:0};
+    const insertedTask = await tasks.findOne({habit: "anime"});
+    expect(insertedTask).toEqual(mockTask);
+  });
 });

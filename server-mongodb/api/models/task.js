@@ -65,7 +65,7 @@ module.exports = class Task {
           .collection("tasks")
           .findOneAndUpdate(
             console.log(habit),
-            { habit: this.habit },
+            { _id: ObjectId(this.id)},
             { $inc: { week: 1 } },
             { returnOriginal: false }
           );

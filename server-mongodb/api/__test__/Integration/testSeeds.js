@@ -1,4 +1,4 @@
-/*
+
 db.tasks.insertMany([
   {
     habit: "TESTTT",
@@ -19,4 +19,4 @@ db.tasks.insertMany([
     week: [0, 0, 0, 6, 0, 0, 0],
   },
 ]);
-*/
+

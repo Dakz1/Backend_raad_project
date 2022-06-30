@@ -1,4 +1,4 @@
-/*
+
 const Task = require('../../../models/Task');
 
 const mongodb = require('mongodb');
@@ -6,14 +6,14 @@ jest.mock('mongodb');
 
 const db = require('../../../dbConfig');
 
-describe('Book', () => {
+describe('Task', () => {
     beforeEach(() => jest.clearAllMocks())
     
     afterAll(() => jest.resetAllMocks())
 
     describe('all',  () => {
-        test('it resolves with authors on successful db query', async () => {
-            jest.spyOn(db, 'query')
+        test('it resolves with tasks on successful db query', async () => {
+            jest.spyOn()
                 .mockResolvedValueOnce({ rows: [{}, {}, {}]});
             const all = await Task.all;
             expect(all).toHaveLength(3)
@@ -43,4 +43,3 @@ describe('Book', () => {
     });
     
 })
-*/

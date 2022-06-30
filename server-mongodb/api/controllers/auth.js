@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
-router.post("auth/register", async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const salt = await bcrypt.genSalt();
     const hashed = await bcrypt.hash(req.body.password, salt);
@@ -16,7 +16,7 @@ router.post("auth/register", async (req, res) => {
   }
 });
 
-router.post("auth/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const user = await User.findByEmail(req.body.email);
     if (!user) {

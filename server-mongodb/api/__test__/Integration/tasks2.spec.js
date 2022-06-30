@@ -1,15 +1,17 @@
 const {MongoClient} = require('mongodb');
+const { ObjectId } = require("mongodb");
+
 
 describe('insert', () => {
   let connection;
   let db;
 
   beforeAll(async () => {
-    connection = await MongoClient.connect(globalThis.__MONGO_URI__, {
+    connection = await MongoClient.connect(globalThis.__MONGO_URI__= "mongodb+srv://raaddatabase:TJ9rTxJmiae0pJ0V@cluster0.qf3tv.mongodb.net/?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    db = await connection.db(globalThis.__MONGO_DB_NAME__);
+    db = await connection.db(globalThis.__MONGO_DB_NAME__= "shelter");
   });
 
   afterAll(async () => {
@@ -19,10 +21,10 @@ describe('insert', () => {
   it('should insert a doc into collection', async () => {
     const tasks = db.collection('tasks');
 
-    const mockTask = {_id: ObejctId, name: 'John', email: 'johnny@gmail.com', habit: "dance", frequency: "every hour", week:22};
+    const mockTask = { habit: "anime", frequency: "6", week:0};
     await tasks.insertOne(mockTask);
 
-    const insertedTask = await tasks.findOne({_id: 'some-user-id'});
+    const insertedTask = await tasks.findOne({_id: ObjectId});
     expect(insertedTask).toEqual(mockTask);
   });
 });

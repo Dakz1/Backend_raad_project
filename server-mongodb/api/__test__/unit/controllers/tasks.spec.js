@@ -45,7 +45,7 @@ describe('tasks controller', () => {
             let testTask = {
                 id: 2, habit: 'Test Book', 
                 frequency: 1,
-                week: [0,0,0,0,0,0,0]
+                week: 1
             }
             jest.spyOn(tasks, 'create')
                 .mockResolvedValue(new Task(testTask));

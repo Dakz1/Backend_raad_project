@@ -1,6 +1,5 @@
-const server = require('../../server');
+const server = require('../server');
 const request = require('supertest');
-const { string } = require('yargs');
 
 // describe('GET/',  () => {
 //     it('return status code 201 if all tasks are passed', async () => {
@@ -8,7 +7,6 @@ const { string } = require('yargs');
         
 //     })
 // });
-
 
 describe("GET /", () => {
     test("200: Responds with an array of messages", () => {

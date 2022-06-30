@@ -64,8 +64,9 @@ module.exports = class Task {
         let updatedTaskData = await db
           .collection("tasks")
           .findOneAndUpdate(
-            { _id: ObjectId(this.id) },
-            { $inc: { frequency: 2 } },
+            console.log(habit),
+            { habit: this.habit },
+            { $inc: { week: 1 } },
             { returnOriginal: false }
           );
         let updatedTask = new Task(updatedTaskData.value);

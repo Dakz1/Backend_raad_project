@@ -1,7 +1,4 @@
-const Book = require('../../../models/Book');
-const Author = require('../../../models/Author');
-
-jest.mock('../../../models/Author');
+const Task = require('../../../models/Task');
 
 const mongodb = require('mongodb');
 jest.mock('mongodb');
@@ -13,7 +10,7 @@ describe('Book', () => {
     
     afterAll(() => jest.resetAllMocks())
 
-    describe('all', () => {
+    describe('all',  () => {
         test('it resolves with authors on successful db query', async () => {
             jest.spyOn(db, 'query')
                 .mockResolvedValueOnce({ rows: [{}, {}, {}]});
@@ -26,20 +23,20 @@ describe('Book', () => {
         test('it resolves with book on successful db query', async () => {
             let taskData = { id: 1, title: 'Test Book' }
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({rows: [ bookData] });
+                .mockResolvedValueOnce({rows: [ taskData] });
             const result = await Task.findById(1);
-            expect(result).toBeInstanceOf(Book)
+            expect(result).toBeInstanceOf(Task)
         })
     });
 
     describe('create', () => {
         test('it resolves with book on successful db query', async () => {
-            let bookData = { title: 'Test Book', yearOfPublication: 2020, abstract: 'test', authorName: 'Test Author' }
+            let taskData = { habit: 'Test Book', frequency: 2020, week: [0,0,0,0,0,0,0]}
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({rows: [ { ...bookData, id: 1 }] });
+                .mockResolvedValueOnce({rows: [ { ...taskData, id: 1 }] });
             jest.spyOn(Author, 'findOrCreateByName')
                 .mockResolvedValueOnce(new Author({id: 1, name: 'Test Author'}));
-            const result = await Book.create(bookData);
+            const result = await Task.create(taskData);
             expect(result).toHaveProperty('id')
         })
     });

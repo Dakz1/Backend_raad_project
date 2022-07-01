@@ -1,4 +1,4 @@
-const db = connect("mongodb://localhost:27017/shelter");
+const db = connect("mongodb://habit-buddy-backend-server.herokuapp.com/shelter");
 
 db.tasks.drop();
 db.users.drop();

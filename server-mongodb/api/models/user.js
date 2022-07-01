@@ -17,8 +17,6 @@ module.exports = class User {
       try {
         const db = await init();
         const userData = await db.collection("users").find().toArray();
-        console.log(userData);
-        //let users = userData.map((b) => new User(b));
         resolve(userData);
       } catch (err) {
         reject("User not found");

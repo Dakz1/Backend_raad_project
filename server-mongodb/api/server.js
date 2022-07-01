@@ -1,16 +1,19 @@
 const express = require("express");
 const cors = require("cors");
-const server = express();
-server.use(cors());
-server.use(express.json());
+const mongoose = require('mongoose');
+require("dotenv").config();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 const controllers = require("./controllers");
-server.use("/users", controllers.users);
-server.use("/auth", controllers.auth);
-server.use("/tasks", controllers.tasks)
+app.use("/users", controllers.users);
+app.use("/auth", controllers.auth);
+app.use("/tasks", controllers.tasks)
 
 // Root route
-server.get("/", (req, res) => res.send("Hello and Welcome to the server!"));
+app.get("/", (req, res) => res.send("Hello and Welcome to the server!"));
 
-module.exports = server;
+module.exports = app;
 

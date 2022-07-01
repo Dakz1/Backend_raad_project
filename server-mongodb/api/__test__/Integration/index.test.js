@@ -1,31 +1,39 @@
-const supertest = require('supertest')
-const server = require('../../server')
+const supertest = require('supertest');
+const app = require('../../server');
+const appli = require('../../index');
+const request = supertest(app);
 
-const port = 4000;
+// const port = 4000;
 
-let api;
+
 
 const {connectDB, disconnectDB} = require('../../database')
 
 describe("api endpoints", () => {
+  // let api;
     beforeAll(async ()=>{
         await connectDB();
     })
-    beforeEach(async () => {
-        api = server.listen(port);
-      });
-    afterEach(async () => {
-        console.log("closing test server");
-        await api.close();
-      });
+    // beforeEach(async () => {
+    //     api = app.listen(5000, () => 
+    //       console.log("listening to port 5000")
+    //     );
+    // });
+    // afterEach(async () => {
+    //     console.log("closing test server");
+    //     await api.close(done);
+    // });
     afterAll(async () => {
-        await disconnectDB();
-      });
+      await disconnectDB();
+      
+      await appli.close();
+    });
 
     describe("GET route endpoint", () => {
         test("should return statusCode 200", async () => {
-            const res = await request(api).get("/");
+            const res = await request.get("/");
             expect(res.statusCode).toBeTruthy();
         });
+        
     })
 })

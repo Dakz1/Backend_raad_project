@@ -8,6 +8,11 @@
     "start": "node index.js",
     "test": "jest --watchAll --coverage"
   },
+  "config": {
+    "mongodbMemoryServer": {
+      "version": "latest"
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

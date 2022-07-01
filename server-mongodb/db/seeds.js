@@ -1,4 +1,4 @@
-const db = connect(process.env.MONGODB_URI || "mongodb://habit-buddy-backend-server.herokuapp.com/shelter");
+const db = connect(process.env.MONGODB_URI || "mongodb://localhost:27017/shelter");
 
 db.tasks.drop();
 db.users.drop();

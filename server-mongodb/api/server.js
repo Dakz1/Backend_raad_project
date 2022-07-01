@@ -14,4 +14,3 @@ server.get("/", (req, res) => res.send("Hello and Welcome to the server!"));
 
 module.exports = server;
 
-//put the post and patch requests not id, create a route for postbyid patchid, deletebyid,

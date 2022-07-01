@@ -1,5 +1,4 @@
-/*
-const { tasks } = require('../../../controllers');
+
 const tasksController = require('../../../controllers/tasks')
 const Task = require('../../../models/Task');
 
@@ -16,25 +15,25 @@ describe('tasks controller', () => {
     describe('get all the tasks', () => {
         test('it returns all tasks with a 200 status code', async () => {
             jest.spyOn(Task, 'all', 'get')
-                 .mockResolvedValue(['book1', 'book2']);
-            await tasksController.index(null, mockRes);
+                 .mockResolvedValue({habit:"1", frequency: "3", week:2});
+            await tasksController.get(null, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(200);
-            expect(mockJson).toHaveBeenCalledWith(['book1', 'book2']);
+            expect(mockJson).toHaveBeenCalledWith({habit:"1", frequency: "3", week:2});
         })
     });
 
     describe('show', () => {
-        test('it returns a book with a 200 status code', async () => {
+        test('it returns a task with a 200 status code', async () => {
             let testTask = {
-                id: 1, title: 'Test Book', 
-                yearOfPublication: 2021,
-                abstract: 'testing', author_name: 'Bob', author_id: 1
+                habit: 'Test Book', 
+                frequency: 2021,
+                week:2
             }
-            jest.spyOn(Book, 'findById')
-                .mockResolvedValue(new Book(testBook));
+            jest.spyOn(Task, 'findById')
+                .mockResolvedValue(new Task(testTask));
                 
-            const mockReq = { params: { id: 1 } }
-            await tasksController.show(mockReq, mockRes);
+            const mockReq = { params: { _id:ObjectId } }
+            await tasksController.get(mockReq, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(200);
             expect(mockJson).toHaveBeenCalledWith(new Task(testTask));
         })
@@ -45,13 +44,13 @@ describe('tasks controller', () => {
             let testTask = {
                 id: 2, habit: 'Test Book', 
                 frequency: 1,
-                week: [0,0,0,0,0,0,0]
+                week: 1
             }
             jest.spyOn(tasks, 'create')
                 .mockResolvedValue(new Task(testTask));
                 
             const mockReq = { body: testTask }
-            await tasksController.create(mockReq, mockRes);
+            await tasksController.post(mockReq, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(201);
             expect(mockJson).toHaveBeenCalledWith(new Task(testTask));
         })
@@ -69,4 +68,3 @@ describe('tasks controller', () => {
     });
     
 })
-*/

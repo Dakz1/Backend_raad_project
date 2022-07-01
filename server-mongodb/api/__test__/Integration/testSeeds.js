@@ -1,22 +1,22 @@
-/*
+db.drop.tasks()
 db.tasks.insertMany([
   {
     habit: "TESTTT",
     frequency: 24,
-    freq_text: "",
-    week: [0, 1, 0, 0, 99, 0, 0],
+    name: "aleks",
+    week: 1,
   },
   {
     habit: "testttting",
     frequency: 102,
-    freq_text: "",
-    week: [0, 0, 2, 0, 0, 0, 0],
+    name: "dak",
+    week: 2,
   },
   {
     habit: "please work ",
     frequency: 100,
-    freq_text: "",
-    week: [0, 0, 0, 6, 0, 0, 0],
+    name: "rich",
+    week: 3,
   },
 ]);
-*/
+
